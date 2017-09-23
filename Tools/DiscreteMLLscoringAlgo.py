@@ -4,6 +4,9 @@ Created on Thu Jul 14 14:39:13 2016
 
 @author: johncook
 """
+
+#NOT WORKING: MUST ADAPT TO NEW GRAPH STRUCTURE, NOT INCLUDED IN PAPER DUE TO POOR PERFORMANCE
+
 from rpy2 import rinterface
 from rpy2.robjects import r
 import numpy as np

@@ -10,7 +10,7 @@ from libpgm.pgmlearner import PGMLearner
 from libpgm.graphskeleton import GraphSkeleton
 from libpgm.dyndiscbayesiannetwork import DynDiscBayesianNetwork
 from libpgm.sampleaggregator import SampleAggregator
-from gunfolds.tools import conversion as conv
+from gunfolds.tools import conversions as conv
 
 
 def DiscretizeDataQuantiles(data,numvalues):
@@ -144,8 +144,10 @@ def normalize(l):
         l[i]=l[i]/sm
     return l
 
-def gettfVdata(graph,numvalues,A):
-    gt=gk.gtranspose(graph)
+def gettfVdata(num_graph,numvalues,A):
+    graph=conv.ian2g(num_graph)
+    num_gt=gk.gtranspose(num_graph)
+    gt=conv.ian2g(num_gt)
     tfVdata={}
     Cond={}
     for i in range(1,len(gt)+1):
@@ -176,11 +178,14 @@ def gettfVdata(graph,numvalues,A):
                         a=copy.copy(conddict[l])
                         a[k[1]]=a[k[1]]*Cond[key[j]][k]
                         conddict[l]=a
+        print(conddict)
         conddictfinal={}
         for j in conddict:
             a=conddict[j]
             q=[str(k) for k in j]
             conddictfinal[str(q)]=normalize(a)
+        print("THIS IS CONDDICTFINAL:")
+        print(conddictfinal)
         tfVdata[str(i)]={'children':graph[str(i)].keys(), 'parents':['past_'+p for p in sorted(gt[str(i)].keys())],
         'cprob':conddictfinal,'numoutcomes':numvalues[i-1],'ord':i-1,'vals':[str(v) for v in range(numvalues[i-1])]}
     return tfVdata       
@@ -188,8 +193,9 @@ def gettfVdata(graph,numvalues,A):
 
 def ConstructDynBN(num_graph,numvalues,A,ss):
     graph=conv.ian2g(num_graph)
+    print(graph)
     V,E,initVdata=INITdata(graph,numvalues)
-    tfVdata=gettfVdata(graph,numvalues,A)
+    tfVdata=gettfVdata(num_graph,numvalues,A)
     d=DynDiscBayesianNetwork()
     skel=GraphSkeleton()
     skel.V=V
@@ -198,5 +204,9 @@ def ConstructDynBN(num_graph,numvalues,A,ss):
     d.E=skel.E
     d.initial_Vdata=initVdata
     d.twotbn_Vdata=tfVdata
+    print(d.V)
+    print(d.E)
+    print(d.initial_Vdata)
+    print(d.twotbn_Vdata)
     data=sampleBN(d,ss)
     return data

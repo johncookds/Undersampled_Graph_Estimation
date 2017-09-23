@@ -1,29 +1,8 @@
-import signal
-import pprint
-import time, socket
-import numpy as np
-import scipy
-import functools, itertools
-import progressbar as pb
-import sys,os
-from scipy.misc import comb
-sys.path.append('/Users/johncook/Desktop/MRN/gunfolds-master/scripts')
-import copy
-from multiprocessing import Pool,Process, Queue, cpu_count, current_process
-from progressbar import ProgressBar, Percentage, \
-    Bar, RotatingMarker, ETA, FileTransferSpeed
-import linear_model as lm
-from gunfolds.tools import traversal as trv
-import modbfutils as bfu
-from gunfolds.tools import graphkit as gk
-from gunfolds.tools import zickle as zkl
-import pylab as plt
-import modunknownrate as ur
-import pandas as pd
-import re
-import DiscretePC as DPC
-import DiscreteMLLscoringAlgo as MLL
 import string
+import numpy as np
+import pandas as pd
+from gunfolds.tools import graphkit as gk
+
 def gobnilp(d):
     d = np.asarray(np.r_[d[:, :-1], d[:, 1:]])
     d=pd.DataFrame(d)
@@ -34,7 +13,7 @@ def gobnilp(d):
     d=d.sort()
     d.columns=list(string.ascii_uppercase[:n*2])
     d.to_csv('data.txt',sep='\t',index=False)
-    os.system(bashCommand)
+    os.system()
     f=open('Output.txt')
     edges=[]
     bedges=[]
@@ -76,3 +55,4 @@ def gobnilp(d):
     for i,j in bedges:
         if [i,j] not in used:
             g2[str(i)][str(j)]=set([(2,0)])
+    return g2

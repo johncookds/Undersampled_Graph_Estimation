@@ -24,13 +24,14 @@ import DiscreteMLLscoringAlgo as MLL
 
 #GRAPH/NETWORK PARAMETERS
 
-ALL_MST=[.5]
+ALL_MST=[.9]
 ALL_DIST=['normal']
 ALL_NOISE_STD=[.01]
 ALL_NSAMPLES=[1000]
 ALL_BURNIN=[100]
 ALL_URATE=[2]
-ALL_ALG=['gc']
+ALL_ALG=['DPC']
+GOBNILPCommand='~/Desktop/MRN/GOBNILP/bin/gobnilp -f=dat -g=untitled ~/Desktop/MRN/gunfolds-master/scripts/data.txt'
 ALL_CARDINALITY=[2]
 densities = {6: [0.15],
     8: [0.15],
@@ -121,10 +122,8 @@ def fan_wrapper(fold='None',n=10,dens=.2,sst=.9,card=2):
             gdens = traversal.density(output['gt'])
             gu = bfutils.increment(output['gt'])
             if estimate_gu:
-                data=dg.ConstructDynBN(g,[card]*n,sst,BURNIN+NSAMPLES*URATE)
+                data=dg.ConstructDynBN(output['gt'],[card]*n,sst,BURNIN+NSAMPLES*URATE)
                 data=data[:,BURNIN:]
-                if np.max(data) > 1000.:
-                    raise NameError()
                 gu_est,gu_time=gu_estimate(data[:,::URATE],ALG)
             else:
                 gu_est=None

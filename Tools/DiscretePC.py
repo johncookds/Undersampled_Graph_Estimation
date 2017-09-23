@@ -13,6 +13,8 @@ from scipy.stats import chi2_contingency
 import pandas as pd
 import itertools
 from scipy.stats import chisqprob
+from gunfolds.tools import conversions as conv
+import copy
 
 def makeDF(data):
     data=pd.DataFrame(data)
@@ -40,11 +42,19 @@ def dpc(data, varst,pval=0.1):
          print "done"
          return ChiSquaredTest(x, y, condset=parents, shift=n)
 
-    def prune(elist, mask, g):
+    def dir_prune(elist, mask, g):
         for e in mask:
-            g[e[0]][e[1]].remove((0, 1))
+            sett=copy.deepcopy(g[e[0]][e[1]])
+            sett.remove((0,1))
+            g[e[0]][e[1]]=sett
             elist.remove(e)
-        gk.clean_leaf_nodes(g)
+
+    def bi_prune(mask, g):
+        for e in mask:
+            sett=copy.deepcopy(g[e[0]][e[1]])
+            sett.remove((2,0))
+            g[e[0]][e[1]]=sett
+            g[e[1]][e[0]]=sett
 
     def chisq_of_df_cols(df, c1, c2):
         groupsizes = df.groupby([c1, c2]).size()
@@ -91,10 +101,19 @@ def dpc(data, varst,pval=0.1):
             val=chisqprob(chi2,dof)
         return val > pval
 
+    def stringify(array):
+        d=[]
+        for i in array:
+            d.append((str(i[0]),str(i[1])))
+        return d
         
-    g  = gk.superclique(n)
-    gtr = gk.gtranspose(g)
-    el = gk.edgelist(g)
+    num_g  = gk.superclique(n)
+    el = gk.edgelist(num_g)
+    el = stringify(el)
+    print(el)
+    num_gtr = gk.gtranspose(num_g)
+    gtr=conv.ian2g(num_gtr)
+    g = conv.ian2g(num_g)
     for counter in range(n):
         to_remove = []
         for e in el:
@@ -103,17 +122,18 @@ def dpc(data, varst,pval=0.1):
                 if cindependent(e[1], e[0], counter, parents=ppp, pval=pval):
                     to_remove.append(e)
                     gtr[e[1]].pop(e[0], None)
-        prune(el, to_remove, g)
-
+        dir_prune(el, to_remove, g)
+    print(g)
     bel = [map(lambda k: str(k+1), x) for x in combinations(range(n), 2)]
+    bi_list=[]
     for e in bel:
         ppp = list(set(gtr[e[0]].keys()) | set(gtr[e[1]].keys()))
         ppp = map(lambda x: int(x)-1, ppp)
         if bindependent(e[0], e[1], parents=ppp, pval=pval):
-            g[e[0]][e[1]].remove((2, 0))
-            g[e[1]][e[0]].remove((2, 0))
+            bi_list.append(e)
+    bi_prune(bi_list, g)
+    g=conv.dict_format_converter(g)
     gk.clean_leaf_nodes(g)
-
     return g
 
 
