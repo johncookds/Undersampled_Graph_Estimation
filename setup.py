@@ -20,8 +20,7 @@ setup(
     author_email='johncookds@gmail.com',
     long_description=description,
     include_package_data=True, # Include files listed in MANIFEST.in
-    packages=['estimation'], # Sub-packages must be explicitly listed.
+    packages=['dbnestimation'], # Sub-packages must be explicitly listed.
     #entry_points=epoints,
     install_requires=install_requires, # List of dependencies.
-    zip_safe=False,
-    ) # Override annoying default behavior of easy_install.
+    zip_safe=False) # Override annoying default behavior of easy_install.
