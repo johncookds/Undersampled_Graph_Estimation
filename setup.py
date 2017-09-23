@@ -8,9 +8,9 @@ z#execfile('estimation/version.py') # Acquire version constants.
 # Define some package entry points. These will be command-line scripts that get
 # installed into the user's PATH
 
-install_requires = ['gunfolds>=0.0.1']
+install_requires = []
 
-dependency_links=['https://gitlab.com/undersampling/gunfolds/tarball/master#egg=gunfolds-0.0.1']
+dependency_links=[]
 
 setup(
     name='Undersampled_Graph_Estimation',
