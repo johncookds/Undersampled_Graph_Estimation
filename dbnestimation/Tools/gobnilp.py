@@ -2,6 +2,7 @@ import string
 import numpy as np
 import pandas as pd
 from gunfolds.tools import graphkit as gk
+from gunfolds.tools import conversions as conv
 
 def gobnilp(d):
     d = np.asarray(np.r_[d[:, :-1], d[:, 1:]])
@@ -44,7 +45,8 @@ def gobnilp(d):
                     bedges.append([new-n,first-n])
                 if new <=n:
                     edges.append([new, first-n])
-    g2=gk.emptyG(n)
+    num_g2=gk.emptyG(n)
+    g2 = conv.ian2g(num_g2)
     used=[]
     for i,j in edges:
         if [i,j] in bedges or [j,i] in bedges:
@@ -55,4 +57,4 @@ def gobnilp(d):
     for i,j in bedges:
         if [i,j] not in used:
             g2[str(i)][str(j)]=set([(2,0)])
-    return g2
+    return conv.dict_format_converter(g2)
