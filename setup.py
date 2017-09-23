@@ -10,7 +10,7 @@ z#execfile('estimation/version.py') # Acquire version constants.
 
 install_requires = ['gunfolds>=0.0.1']
 
-
+dependency_links=['https://gitlab.com/undersampling/gunfolds/tarball/master#egg=gunfolds-0.0.1']
 
 setup(
     name='Undersampled_Graph_Estimation',
@@ -23,4 +23,6 @@ setup(
     packages=['dbnestimation'], # Sub-packages must be explicitly listed.
     #entry_points=epoints,
     install_requires=install_requires, # List of dependencies.
-    zip_safe=False) # Override annoying default behavior of easy_install.
+    dependency_links=dependency_links
+    zip_safe=False,
+    ) # Override annoying default behavior of easy_install.
