@@ -19,7 +19,7 @@ PC: working (uses gunfolds.tools version)
 
 GC: working
 
-pyfgs: working
+pyfgs: working (not running in parallel due to java vm issues)
 
 discrete algorithms:
 
