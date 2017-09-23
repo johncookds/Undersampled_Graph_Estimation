@@ -3,7 +3,7 @@ from setuptools import setup
 with open('README.md') as description:
     description = description.read()
 
-z#execfile('estimation/version.py') # Acquire version constants.
+#execfile('estimation/version.py') # Acquire version constants.
 
 # Define some package entry points. These will be command-line scripts that get
 # installed into the user's PATH
@@ -15,7 +15,7 @@ dependency_links=[]
 setup(
     name='Undersampled_Graph_Estimation',
     description='Tools to explore dynamic causal graphs in the case of undersampled data',
-    version=__version__,
+    version='0.0.1',
     author='John Cook',
     author_email='johncookds@gmail.com',
     long_description=description,
