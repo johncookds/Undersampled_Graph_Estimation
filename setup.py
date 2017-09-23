@@ -23,6 +23,6 @@ setup(
     packages=['dbnestimation'], # Sub-packages must be explicitly listed.
     #entry_points=epoints,
     install_requires=install_requires, # List of dependencies.
-    dependency_links=dependency_links
-    zip_safe=False,
+    dependency_links=dependency_links,
+    zip_safe=False
     ) # Override annoying default behavior of easy_install.
