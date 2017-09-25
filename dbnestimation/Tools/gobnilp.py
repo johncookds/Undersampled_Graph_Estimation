@@ -4,6 +4,12 @@ import pandas as pd
 from gunfolds.tools import graphkit as gk
 from gunfolds.tools import conversions as conv
 
+PATH_TO_GOBNILP=''
+PATH_TO_SETTINGS_FILE=''
+PATH_TO_DATA=''
+
+GOBNILPCommand='%s/GOBNILP/bin/gobnilp -f=dat -g=%s %s' % (PATH_TO_GOBNILP,PATH_TO_SETTINGS_FILE,PATH_TO_DATA)
+
 def gobnilp(d):
     d = np.asarray(np.r_[d[:, :-1], d[:, 1:]])
     d=pd.DataFrame(d)
@@ -13,8 +19,8 @@ def gobnilp(d):
     d.index=d.index+1
     d=d.sort()
     d.columns=list(string.ascii_uppercase[:n*2])
-    d.to_csv('data.txt',sep='\t',index=False)
-    os.system()
+    d.to_csv(PATH_TO_DATA,sep='\t',index=False)
+    os.system(GOBNILPCommand)
     f=open('Output.txt')
     edges=[]
     bedges=[]
