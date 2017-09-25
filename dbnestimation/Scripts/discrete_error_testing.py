@@ -31,7 +31,6 @@ ALL_NSAMPLES=[1000]
 ALL_BURNIN=[100]
 ALL_URATE=[2]
 ALL_ALG=['DPC']
-GOBNILPCommand='~/Desktop/MRN/GOBNILP/bin/gobnilp -f=dat -g=untitled ~/Desktop/MRN/gunfolds-master/scripts/data.txt'
 ALL_CARDINALITY=[2]
 densities = {6: [0.15],
     8: [0.15],
