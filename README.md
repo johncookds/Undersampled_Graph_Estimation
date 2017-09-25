@@ -31,3 +31,7 @@ MLL: not working, excluded from paper due to poor performance
 
 # To Do:
   1. explore new functions for fast greedy equivalence search now in latest pycausal release
+
+Acknowledgment
+========
+This work was, in part, supported by  NSF IIS-1318759 grant.
