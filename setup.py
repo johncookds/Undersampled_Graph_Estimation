@@ -8,7 +8,7 @@ with open('README.md') as description:
 # Define some package entry points. These will be command-line scripts that get
 # installed into the user's PATH
 
-install_requires = []
+install_requires = ['pycausal']
 
 dependency_links=[]
 
