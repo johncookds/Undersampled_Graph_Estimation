@@ -4,6 +4,8 @@ Algorithms for graph estimation and data generation built on top of [gunfolds](h
 
 Built for Causal UAI 2017 paper [Learning Dynamic Structure from Undersampled Data](https://www.cs.purdue.edu/homes/eb/causal-uai17/papers/7.pdf).
 
+Python 2.7
+
 # Algorithm status:
 
 (9/23/17)
