@@ -6,11 +6,11 @@ Built for Causal UAI 2017 paper [Learning Dynamic Structure from Undersampled Da
 
 Python 2.7
 
-Packages/software used in the making of the paper and repo:
-gunfolds
-pycausal
-libpgm
-GOBNILP
+Packages/software used in the making of the paper and repo:  
+gunfolds 
+pycausal  
+libpgm   
+GOBNILP   
 
 # Algorithm status:
 
