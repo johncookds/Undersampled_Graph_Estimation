@@ -10,10 +10,10 @@ Python 2.7
 
 (9/23/17)
 
-discrete_data_generation:
+##discrete_data_generation:
 Working with latest gunfolds and latest libpgm
 
-continuous algorithms:
+##continuous algorithms:
 
 SVAR: working (uses gunfolds.tools version)
 
@@ -23,7 +23,7 @@ GC: working
 
 pyfgs: working (not running in parallel due to java vm issues)
 
-discrete algorithms:
+##discrete algorithms:
 
 DPC: working
 
